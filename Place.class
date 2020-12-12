@@ -1,0 +1,15 @@
+public abstract class Place {
+    protected int population = 0;
+    protected String name = "";
+
+    protected Place (String name, int population){
+        this.name = name;
+        this.population = population;
+    }
+
+    protected String InfoGet(){
+        return String.format("name - %s\npopulation - %s",this.name,this.population);
+    }
+    protected void Repopulation (int population){
+        this.population = population;
+}
