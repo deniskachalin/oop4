@@ -1,0 +1,9 @@
+public class Capital extends City{
+    protected boolean capitalCity = true;
+    protected Capital (String name, int population, String region){
+        super(name, population, region);
+    }
+    @Override
+    protected String InfoGet(){
+        return super.InfoGet() + "\n" + "Столица";
+    }}}
