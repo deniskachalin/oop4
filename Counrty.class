@@ -1,0 +1,18 @@
+public class Country {
+    private ArrayList<Place> countryList= new ArrayList<Place>();
+    private String name;
+    public Country(String name){
+        this.name = name;
+    }
+    public void AddPlace(Place place){
+        countryList.add(place);
+    }
+    public void RemovePlace(int i){
+        countryList.remove(i);
+    }
+    public ArrayList<Place> GetList(){
+        return this.countryList;
+    }
+    public String ShowElement(int i){
+            return this.countryList.get(i).InfoGet();
+    }}
