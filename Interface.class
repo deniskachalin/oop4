@@ -1,0 +1,129 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Interface {
+    private static Country country;
+    static Scanner console = new Scanner(System.in);
+    public static void NamingCountry() {
+                System.out.println("Name your country");
+                country = new Country(console.nextLine());
+        WorkingWithCountry();
+        }
+
+        public static void WorkingWithCountry(){
+            System.out.println("What do you want to do?\n 1 - add\n 2 - remove\n 3 - search\n 4 - show all list\n 5 - close\n 6 - repopulation");
+            switch(TaskChooser(6)){
+                case 1:
+                    Add();
+                    break;
+                case 2:
+                    Remove();
+                    break;
+                case 3:
+                    Search();
+                    break;
+                case 4:
+                    Show();
+                    break;
+                case 5:
+                    return;
+                case 6:
+                    Repopulation();
+            }
+            WorkingWithCountry();
+            return;
+
+        }
+
+        public static void Repopulation(){
+            System.out.println("Enter place name");
+            String name = console.nextLine();
+            boolean b = false;
+            for (int i = 0; i < country.GetList().size(); i ++){
+                if (name.equals(country.GetList().get(i).name)){
+                    System.out.println("Enter new population");
+                    int population = CorrectInteger();
+                    country.GetList().get(i).Repopulation(population);
+                    b = true;
+                }}
+            if (!b){
+                System.out.println("Nothing was found");
+            }}
+        public static int CorrectInteger(){
+        try {
+            int c = Integer.parseInt(console.nextLine());
+            return c;
+        }
+        catch (NumberFormatException e){
+            System.out.println("Incorrect enter, repeat");
+            return CorrectInteger();
+        }}
+    public static int TaskChooser(int d){
+        int c;
+        c = CorrectInteger();
+            if (c > d){
+                System.out.println("Incorrect enter, repeat");
+                return TaskChooser(d);
+            }
+            if (c < 1){
+                System.out.println("Incorrect enter, repeat");
+                return TaskChooser(d);
+            }
+            return c;
+        }
+    public static void Add(){
+        Place place = new Region("", 0, "");
+        System.out.println("What do you want to add?\n 1 - region\n 2 - city");
+        String name;
+        int population;
+        switch (TaskChooser(2)) {
+            case 1:
+                System.out.println("Enter a name");
+                name = console.nextLine();
+                System.out.println("Enter a number of population");
+                population = CorrectInteger();
+                System.out.println("Enter a center city name");
+                place = new Region(name, population, console.nextLine());
+                break;
+            case 2:
+                System.out.println("Enter a name");
+                name = console.nextLine();
+                System.out.println("Enter a number of population");
+                population = CorrectInteger();
+                System.out.println("Enter a region name");
+                String regionName = console.nextLine();
+                System.out.println("Is this city central city of region?\n 1 - yes\n 2 - no");
+                int z = TaskChooser(2);
+                if (z == 1) {
+                    place = new Capital(name, population, regionName);
+                } else if (z == 2) {
+                    place = new City(name, population, regionName);
+                }
+                break;
+        }
+            country.AddPlace(place);
+    }
+    public static void Remove(){
+        System.out.println("Enter name of place that you want to delete from your country");
+        String name = console.nextLine();
+        for (int i = 0; i < country.GetList().size(); i++){
+            if (name.equals(country.GetList().get(i).name)){
+                country.RemovePlace(i);
+                System.out.println("Deleted successful");
+            }}}
+    public static void Search(){
+        System.out.println("Enter place name");
+        String name = console.nextLine();
+        boolean b = false;
+        for (int i = 0; i < country.GetList().size(); i ++){
+            if (name.equals(country.GetList().get(i).name)){
+                System.out.println(country.ShowElement(i));
+                b = true;
+            }}
+        if (!b){
+            System.out.println("Nothing was found");
+        }}
+    public static void Show (){
+        for (int i = 0; i < country.GetList().size(); i++){
+            System.out.println(" -" + country.GetList().get(i).name + "\n");
+        }}
