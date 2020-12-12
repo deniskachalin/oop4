@@ -1,0 +1,5 @@
+public class JavaApplication8 {
+    public static void main(String[] args) {
+        Interface I = new Interface();
+        I.NamingCountry();
+    }}
