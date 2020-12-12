@@ -1,0 +1,10 @@
+public class Region extends Place {
+    protected String centerCity = "";
+    protected Region(String name, int population, String centerCity){
+        super(name, population);
+        this.centerCity = centerCity;
+    }
+    @Override
+    protected String InfoGet(){
+        return super.InfoGet() + String.format("\ncentral city - %s",this.centerCity);
+    }}
